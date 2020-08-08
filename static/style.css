@@ -36,3 +36,12 @@ display: block;
 }
 
 #ROY_table_header{text-align: center;}
+
+footer{
+    background-color: gold;
+}
+
+.footer-div {
+    font-family: Verdana;
+    text-align:center;
+}
