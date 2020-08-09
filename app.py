@@ -39,7 +39,7 @@ def welcome3():
     
     return render_template('about.html')
 
-@app.route("/api/v1.0/testing")
+@app.route("/testing")
 def all_rookies_table():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -64,9 +64,7 @@ def all_rookies_table():
         test_dict["Tm"] = Tm
         test_dict["Age"] = int(Age)
         test_dict["PTS"] = int(PTS)
-        # test_dict["capacity_mw"] = float(capacity_mw)
-        # test_dict["primary_fuel"] = primary_fuel
-        # test_dict["commissioning_year"] = commissioning_year
+
         all_rows.append(test_dict)
     # unique_list = list(np.ravel(results3))
     # print(all_rows)
