@@ -26,6 +26,7 @@ function initTable() {
   
       $(document).ready(() => {
         $("#energy-table").DataTable({
+          "scrollX": true,
           data: tableData,
           columns: [
             { title: "Player" },
