@@ -45,6 +45,7 @@ function initTable() {
             { title: "Defensive Rebound" },
             { title: "eFG%" },
             { title: "FG" },
+            { title: "FG%" },
             { title: "FG Attempts" },
             { title: "FT" },
             { title: "FT%" },
