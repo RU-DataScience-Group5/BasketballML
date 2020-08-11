@@ -3,7 +3,9 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import text  #ES import text to use SQL text directly
 from sqlalchemy import create_engine, func
+
 
 from flask import Flask, jsonify, render_template
 
@@ -38,6 +40,22 @@ def welcome2():
 def welcome3():
     
     return render_template('about.html')
+
+@app.route("/scatter.html") #test route for scatterplot page
+def welcome4():
+    
+    return render_template('scatter.html')
+
+@app.route("/<season>/<xstat>/<ystat>")
+def getdata(season,xstat,ystat):
+    s = text(
+        f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+        FROM combined_data
+        WHERE season=:season AND "Tm" !=:team """)
+    conn = engine.connect()
+    result = conn.execute(s, season=season, team='TOT').fetchall()
+    print(result)
+    return jsonify([dict(row) for row in result])
 
 @app.route("/testing")
 def all_rookies_table():
