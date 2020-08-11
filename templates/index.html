@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>NBA Awards & Machine Learning</title>
-
+  <!-- CSS Stylesheet -->
   <link rel="stylesheet" type="text/css" href="../static/style.css">
+  <!-- D3 Script -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
-
+  <!-- Bootstrap CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
 
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- DataTables -->
-  
   <link rel="stylesheet" type = "text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
@@ -23,11 +23,8 @@
 <body>
 
     <header>
-        <!-- <a class = header_pic><img src= 'https://images.wallpaperscraft.com/image/basketball_ring_bw_net_122454_2560x1080.jpg' width = 100% height = '250'> </a> -->
         <a class = header_pic><img src= 'https://www.vrfitnessinsider.com/wp-content/uploads/2017/10/2016-nba-finals-vr-photo-04_3000.0.jpg' width = 100% height = '450'> </a>
-        <!-- https://basketballforever.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/03/11231639/Screen-Shot-2020-03-11-at-7.15.37-PM.png -->
-        <!-- https://www.nbcsports.com/bayarea/sites/csnbayarea/files/styles/article_hero_image/public/2016/09/23/basketball-basket-view-swish.jpg?itok=UewZyyjA -->
-        <!-- https://www.vrfitnessinsider.com/wp-content/uploads/2017/10/2016-nba-finals-vr-photo-04_3000.0.jpg -->
+
         <h1>NBA Awards Predictor</h1>
     </header>
 
@@ -55,15 +52,22 @@
         <div class = "row">
             <p id = "intro">This webpage was created in an attempt to utlize Machine Learning in the world of sports, specifically the National Basketball Association.</p>
             <p id = "p1">The world of sports is continually evolving with the integration of science for the optimization of its athletes, especially when concerned with their health and their ability to maintain their longevity. The world of Data Science has also crept its way into how the game is coached and susbsequently, how the game is played. It is now commonplace for star athletes to be rested for "meaningless" games in order to survive the grueling marathon that is the NBA Regular Season.</p>
-            <!-- <p id = "intro">This webpage is a collaborative effort between Alex Valladares, Evan Sims, Rick Shevlin, and Nick VanLangen</p> -->
+            <p id = "intro">By publishing years worth box score data, Basketball Reference has become a great source for this project. By aggregating and cleaning the data, we were able to take a closer look at what statistical categories have the most influence in determining a player's effectiveness throughout the season. We have plotted the following graphs to illustrate the correlation that certain stats have to Minutes Played. What you will see is that the "Stars" or "Household Names" of the league tend to be higher on the list.</p>
+        </div>
+
+        <div class = "row">
+          
         </div>
     </div>
       
+    <!-- All Players Table -->
     <div class = "container">
         <div class = "row">
-            <table id="energy-table" class="display"></table>
+          <h3 id = table_header>NBA Player Data from 2000-2020</h3>
         </div>
-        
+        <div class = "row">
+            <table id="all-players-table" class="display"></table>
+        </div>
     </div>
 
     

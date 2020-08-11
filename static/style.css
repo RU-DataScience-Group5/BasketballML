@@ -35,7 +35,8 @@ header h1 {
 display: block;
 }
 
-#ROY_table_header{text-align: center;}
+#table_header{text-align: center;
+font-weight: bold;}
 
 footer{
     background-color: gold;

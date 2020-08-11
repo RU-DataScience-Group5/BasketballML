@@ -57,6 +57,17 @@ def getdata(season,xstat,ystat):
     print(result)
     return jsonify([dict(row) for row in result])
 
+@app.route("/all_data")
+def get_all_data():
+    s = text(
+        f"""SELECT *
+        FROM combined_data
+        WHERE "Tm" !=:team """)
+    conn = engine.connect()
+    result = conn.execute(s, team = "TOT").fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
 @app.route("/testing")
 def all_rookies_table():
     # Create our session (link) from Python to the DB
