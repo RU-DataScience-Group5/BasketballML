@@ -73,17 +73,12 @@ def all_rookies_table():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all Power Plants depending on filter"""
     
     results3 = session.query(all_rookies_data.Player,all_rookies_data.Season, all_rookies_data.Tm, all_rookies_data.Age, all_rookies_data.PTS).all()
     # .filter_by(primary_fuel='Gas').all()
-    # for row in results3:
-    #     print(f'Plant Name: {row.name} ||| Capacity (MW): {row.capacity_mw} ||| Fuel Type: {row.primary_fuel}')
 
     session.close()
 
-
-    # Failed Attempt to return all results
 
     all_rows = []
     for Player, Season, Tm, Age, PTS in results3:
@@ -103,3 +98,4 @@ def all_rookies_table():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    # app.run(port=8000)

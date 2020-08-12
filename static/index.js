@@ -122,5 +122,5 @@ function initTable2() {
 
 initTable2();
 
-// d3.json("/all_data").then(function(data){
-//   console.log(data)});
+d3.json("/all_data").then(function(data){
+  console.log(data)});
