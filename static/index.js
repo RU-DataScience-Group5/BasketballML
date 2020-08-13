@@ -1,9 +1,12 @@
+// d3.json("/all_data").then(function(data){
+//   console.log(data)});
+
 // Index HTML Page
 
 function initTable() {
-    d3.csv("../Data/AllPlayerData.csv").then(function(data){
+    d3.json("/all_players_basic").then(function(data){
         console.log(data);
-      var columnNames = ["Player", "PlayerID", "Pos", "Season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "Rk", "STL", "TOV", "TRB", "MVP"];
+      var columnNames = ["Player", "PlayerID", "Pos", "Season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "STL", "TOV", "TRB", "MVP"];
       const redux = (array) =>
         array.map((o) =>
           columnNames.reduce((acc, curr) => {
@@ -49,7 +52,6 @@ function initTable() {
             { title: "Offensive Rebound" },
             { title: "Personal Fouls" },
             { title: "Points Scored" },
-            { title: "Rank" },
             { title: "Steals" },
             { title: "Turnovers" },
             { title: "Total Rebounds" },
@@ -65,9 +67,9 @@ function initTable() {
 initTable();
 
 function initTable2() {
-  d3.csv("../Data/ROY Data/all_rookies_1990_2020_addtm.csv").then(function(data){
+  d3.json("/all_rookies").then(function(data){
       console.log(data);
-    var columnNames = [ "Rk", "Player",  "Tm", "Age", "Yrs", "G", "MP", "FG", "FGA", "3P", "3PA", "FT", "FTA", "ORB", "TRB", "AST", "STL", "BLK", "TOV", "PF", "PTS", "FG%", "3P%", "FT%", "MP (AVG)", "PTS (AVG)", "TRB (AVG)", "AST (AVG)", "Season"];
+    var columnNames = ["Player",  "Tm", "Age", "Yrs", "G", "MP", "FG", "FGA", "3P", "3PA", "FT", "FTA", "ORB", "TRB", "AST", "STL", "BLK", "TOV", "PF", "PTS", "FG%", "3P%", "FT%", "MP (AVG)", "PTS (AVG)", "TRB (AVG)", "AST (AVG)", "Season"];
     const redux = (array) =>
       array.map((o) =>
         columnNames.reduce((acc, curr) => {
@@ -85,7 +87,6 @@ function initTable2() {
         "scrollX": true,
         data: tableData,
         columns: [
-          { title: "Rank" },
           { title: "Player" },
           { title: "Team" },
           { title: "Age" },
@@ -122,5 +123,5 @@ function initTable2() {
 
 initTable2();
 
-d3.json("/all_data").then(function(data){
-  console.log(data)});
+// d3.json("/all_players_basic").then(function(data){
+//         console.log(data);});
