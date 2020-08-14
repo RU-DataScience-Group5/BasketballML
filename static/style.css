@@ -15,13 +15,21 @@ header h1 {
     text-align: center;
 }
 
-/* .header_pic {
-    height: 100px;
-} */
 
 .col-lg-12 h1 {
     text-align: center;
 }
+
+
+#comissioner{text-align: center;
+    float: left;
+    font-size: 15px;
+    width:30%;
+    padding: 15px;}
+
+#comissioner img {
+    width: 100%;}
+
 
 /* End of Index Template */
 
@@ -47,3 +55,4 @@ footer{
     text-align:center;
 }
 
+#roy_prediction{width:50%;}

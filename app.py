@@ -36,16 +36,25 @@ def welcome2():
     
     return render_template('roy.html')
 
-@app.route("/about.html")
+@app.route("/mvp.html")
 def welcome3():
+    
+    return render_template('mvp.html')
+
+@app.route("/about.html")
+def welcome4():
     
     return render_template('about.html')
 
 @app.route("/scatter.html") #test route for scatterplot page
+<<<<<<< HEAD
 def welcome4():
     inspector = inspect(engine)
     stats_list = inspector.get_columns('combined_data')
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]
+=======
+def welcome5():
+>>>>>>> b978f9fca05a29b6e865c4a662b87fd2bae979aa
     
     s = text(
         f"""SELECT DISTINCT "season"
@@ -86,38 +95,82 @@ def get_all_data():
     # print(result)
     return jsonify([dict(row) for row in result])
 
-@app.route("/testing")
+
+@app.route("/all_rookies")
 def all_rookies_table():
-    # Create our session (link) from Python to the DB
-    session = Session(engine)
+ 
+    s = text(
+        f"""SELECT *
+        FROM all_rookies
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
 
-    """Return a list of all Power Plants depending on filter"""
-    
-    results3 = session.query(all_rookies_data.Player,all_rookies_data.Season, all_rookies_data.Tm, all_rookies_data.Age, all_rookies_data.PTS).all()
-    # .filter_by(primary_fuel='Gas').all()
-    # for row in results3:
-    #     print(f'Plant Name: {row.name} ||| Capacity (MW): {row.capacity_mw} ||| Fuel Type: {row.primary_fuel}')
+    return jsonify([dict(row) for row in result])
 
-    session.close()
-
-
-    # Failed Attempt to return all results
-
-    all_rows = []
-    for Player, Season, Tm, Age, PTS in results3:
-        test_dict = {}
-        test_dict["Player"] = Player
-        test_dict["Season"] = Season
-        test_dict["Tm"] = Tm
-        test_dict["Age"] = int(Age)
-        test_dict["PTS"] = int(PTS)
-
-        all_rows.append(test_dict)
-    # unique_list = list(np.ravel(results3))
-    # print(all_rows)
+@app.route("/all_players_basic")
+def get_all_players():
+    s = text(
+        f"""SELECT *
+        FROM all_players
+        WHERE "PTS" > 0
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
 
 
-    return jsonify(all_rows)
+@app.route("/roy_predictions")
+def get_roy_predictions():
+    s = text(
+        f"""SELECT *
+        FROM roy_predictions
+        order by  "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+@app.route("/roy_predictions/<season>")
+def get_roy_predictions_season(season):
+    s = text(
+        f"""SELECT *
+        FROM roy_predictions
+        WHERE season=:season
+        order by "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s, season=season).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+
+@app.route("/mvp_predictions")
+def get_mvp_predictions():
+    s = text(
+        f"""SELECT *
+        FROM mvp_predictions
+        order by  "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+@app.route("/mvp_predictions/<season>")
+def get_mvp_predictions_season(season):
+    s = text(
+        f"""SELECT *
+        FROM mvp_predictions
+        WHERE season=:season
+        order by "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s, season=season).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
 
 if __name__ == '__main__':
     app.run(debug=True)
