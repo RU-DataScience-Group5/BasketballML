@@ -47,15 +47,11 @@ def welcome4():
     return render_template('about.html')
 
 @app.route("/scatter.html") #test route for scatterplot page
-<<<<<<< HEAD
-def welcome4():
+def welcome5():
     inspector = inspect(engine)
     stats_list = inspector.get_columns('combined_data')
-    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]
-=======
-def welcome5():
->>>>>>> b978f9fca05a29b6e865c4a662b87fd2bae979aa
-    
+    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
+>>>>>>> adea9eb335707ee1f5835ab474b3d2488495e719
     s = text(
         f"""SELECT DISTINCT "season"
         FROM combined_data """)
