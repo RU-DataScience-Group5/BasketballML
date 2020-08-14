@@ -5,6 +5,7 @@ season = '2009-10'
 xstat = 'MP'
 ystat = 'WS'
 var PlayerDataURL = `${season}/${xstat}/${ystat}`
+//var PlayerDataURL = '/localhost:5000/all_data'
 d3.json(PlayerDataURL).then( PlayerData => {
     console.log(data);
     var PlayerName = PlayerData.map(Player => Player["Player"]);
@@ -21,7 +22,6 @@ d3.json(PlayerDataURL).then( PlayerData => {
         else {
             return "gray"
         }
-
     })
     console.log(colorMap)
 
@@ -32,8 +32,8 @@ d3.json(PlayerDataURL).then( PlayerData => {
         type: 'scatter',
         name: 'Team A',
         text: PlayerName,
-        marker: { size: 12,
-                  color: colorMap }
+        marker: {size: 12,
+                color: colorMap }
     };
 
 //var trace2 = {
