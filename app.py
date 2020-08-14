@@ -56,14 +56,23 @@ def welcome4():
     return render_template('scatter.html', seasons=seasons,stats=stats)
 
 
-@app.route("/<season>/<xstat>/<ystat>")
-def getdata(season,xstat,ystat):
-    s = text(
-        f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
-        FROM combined_data
-        WHERE season=:season AND "Tm" !=:team """)
+@app.route("/<award>/<season>/<xstat>/<ystat>")
+def getdata(award,season,xstat,ystat):
+    if award == "mvp":
+        s = text(
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+            FROM combined_data
+            WHERE season=:season AND "Tm" !=:team """)
+    elif award == "roy":
+        s = text(
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+            FROM rookies_only
+            WHERE season=:season AND "Tm" !=:team """)
+    
+    
     conn = engine.connect()
     result = conn.execute(s, season=season, team='TOT').fetchall()
+
     return jsonify([dict(row) for row in result])
 
 @app.route("/all_data")

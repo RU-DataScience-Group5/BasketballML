@@ -10,20 +10,23 @@
 </head>
 
 <body>
-
+  <select id="selAward">
+      <option value='mvp'>Most Valuable Player</option>
+      <option value='roy'>Rookie of the Year</option>
+  </select>
   <select id="selSeason">
     {% for season in seasons %}
-      <option value='{{ season[0] }}'>{{ season[0] }}</li>
+      <option value='{{ season[0] }}'>{{ season[0] }}</option>
     {% endfor %}
   </select>
   <select id="selStatX">
     {% for stat in stats %}
-      <option value='{{ stat }}'>{{ stat }}</li>
+      <option value='{{ stat }}'>{{ stat }}</option>
     {% endfor %}
   </select>
   <select id="selStatY">
     {% for stat in stats %}
-      <option value='{{ stat }}'>{{ stat }}</li>
+      <option value='{{ stat }}'>{{ stat }}</option>
     {% endfor %}
   </select>
   <div id="myDiv"></div>
