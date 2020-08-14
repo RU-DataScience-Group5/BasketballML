@@ -1,9 +1,16 @@
+function UpdateScatter(season, xstat, ystat){
 console.log("here")
 var myDiv = d3.select("#myDiv")
 
-season = '2009-10'
-xstat = 'MP'
-ystat = 'WS'
+season_sel = d3.select("#selSeason")
+xstat_sel = d3.select("#selStatX")
+ystat_sel = d3.select("#selStatY")
+
+season = season_sel.property("value")
+xstat = xstat_sel.property("value")
+ystat = ystat_sel.property("value")
+
+
 var PlayerDataURL = `${season}/${xstat}/${ystat}`
 //var PlayerDataURL = '/localhost:5000/all_data'
 d3.json(PlayerDataURL).then( PlayerData => {
@@ -61,3 +68,12 @@ var layout = {
 
     Plotly.newPlot('myDiv', data,layout);
 })
+}
+
+season_sel = d3.select("#selSeason")
+xstat_sel = d3.select("#selStatX")
+ystat_sel = d3.select("#selStatY")
+
+season_sel.on("change", UpdateScatter)
+xstat_sel.on("change", UpdateScatter)
+ystat_sel.on("change", UpdateScatter)

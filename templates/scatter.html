@@ -10,9 +10,25 @@
 </head>
 
 <body>
-    
-    <div id="myDiv"></div>
-    <script src="../static/js/players_scatter2.js"></script>
+
+  <select id="selSeason">
+    {% for season in seasons %}
+      <option value='{{ season[0] }}'>{{ season[0] }}</li>
+    {% endfor %}
+  </select>
+  <select id="selStatX">
+    {% for stat in stats %}
+      <option value='{{ stat }}'>{{ stat }}</li>
+    {% endfor %}
+  </select>
+  <select id="selStatY">
+    {% for stat in stats %}
+      <option value='{{ stat }}'>{{ stat }}</li>
+    {% endfor %}
+  </select>
+  <div id="myDiv"></div>
+  <script src="../static/js/players_scatter2.js"></script>
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import text  #ES import text to use SQL text directly
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, inspect
 
 
 from flask import Flask, jsonify, render_template
@@ -43,8 +43,18 @@ def welcome3():
 
 @app.route("/scatter.html") #test route for scatterplot page
 def welcome4():
+    inspector = inspect(engine)
+    stats_list = inspector.get_columns('combined_data')
+    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]
     
-    return render_template('scatter.html')
+    s = text(
+        f"""SELECT DISTINCT "season"
+        FROM combined_data """)
+    conn = engine.connect()
+    seasons = conn.execute(s)
+    print(seasons)
+    return render_template('scatter.html', seasons=seasons,stats=stats)
+
 
 @app.route("/<season>/<xstat>/<ystat>")
 def getdata(season,xstat,ystat):
@@ -54,7 +64,6 @@ def getdata(season,xstat,ystat):
         WHERE season=:season AND "Tm" !=:team """)
     conn = engine.connect()
     result = conn.execute(s, season=season, team='TOT').fetchall()
-    print(result)
     return jsonify([dict(row) for row in result])
 
 @app.route("/all_data")
