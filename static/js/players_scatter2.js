@@ -1,10 +1,20 @@
+function UpdateScatter(season, xstat, ystat){
 console.log("here")
 var myDiv = d3.select("#myDiv")
 
-season = '2009-10'
-xstat = 'MP'
-ystat = 'WS'
-var PlayerDataURL = `${season}/${xstat}/${ystat}`
+award_sel = d3.select("#selAward")
+season_sel = d3.select("#selSeason")
+xstat_sel = d3.select("#selStatX")
+ystat_sel = d3.select("#selStatY")
+
+award = award_sel.property("value")
+season = season_sel.property("value")
+xstat = xstat_sel.property("value")
+ystat = ystat_sel.property("value")
+
+
+var PlayerDataURL = `${award}/${season}/${xstat}/${ystat}`
+//var PlayerDataURL = '/localhost:5000/all_data'
 d3.json(PlayerDataURL).then( PlayerData => {
     console.log(data);
     var PlayerName = PlayerData.map(Player => Player["Player"]);
@@ -15,13 +25,22 @@ d3.json(PlayerDataURL).then( PlayerData => {
     console.log(PlayerName, x_stat, y_stat)
 
     colorMap = PlayerData.map(function(Player){
-        if (Player["mvp_votes"] != null){
-            return "blue"
+        if (award == "mvp"){
+            if (Player["mvp_votes"] != null){
+                return "blue"
+            }
+            else {
+                return "gray"
+            }
         }
-        else {
-            return "gray"
+        else if(award == "roy"){
+            if (Player["rookie_votes"] != null){
+                return "blue"
+            }
+            else {
+                return "gray"
+            }
         }
-
     })
     console.log(colorMap)
 
@@ -32,8 +51,8 @@ d3.json(PlayerDataURL).then( PlayerData => {
         type: 'scatter',
         name: 'Team A',
         text: PlayerName,
-        marker: { size: 12,
-                  color: colorMap }
+        marker: {size: 12,
+                color: colorMap }
     };
 
 //var trace2 = {
@@ -61,3 +80,14 @@ var layout = {
 
     Plotly.newPlot('myDiv', data,layout);
 })
+}
+
+award_sel = d3.select("#selAward")
+season_sel = d3.select("#selSeason")
+xstat_sel = d3.select("#selStatX")
+ystat_sel = d3.select("#selStatY")
+
+award_sel.on("change", UpdateScatter)
+season_sel.on("change", UpdateScatter)
+xstat_sel.on("change", UpdateScatter)
+ystat_sel.on("change", UpdateScatter)

@@ -4,7 +4,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import text  #ES import text to use SQL text directly
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, inspect
 
 
 from flask import Flask, jsonify, render_template
@@ -48,18 +48,35 @@ def welcome4():
 
 @app.route("/scatter.html") #test route for scatterplot page
 def welcome5():
-    
-    return render_template('scatter.html')
-
-@app.route("/<season>/<xstat>/<ystat>")
-def getdata(season,xstat,ystat):
+    inspector = inspect(engine)
+    stats_list = inspector.get_columns('combined_data')
+    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
-        f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
-        FROM combined_data
-        WHERE season=:season AND "Tm" !=:team """)
+        f"""SELECT DISTINCT "season"
+        FROM combined_data """)
+    conn = engine.connect()
+    seasons = conn.execute(s)
+    print(seasons)
+    return render_template('scatter.html', seasons=seasons,stats=stats)
+
+
+@app.route("/<award>/<season>/<xstat>/<ystat>")
+def getdata(award,season,xstat,ystat):
+    if award == "mvp":
+        s = text(
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+            FROM combined_data
+            WHERE season=:season AND "Tm" !=:team """)
+    elif award == "roy":
+        s = text(
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+            FROM rookies_only
+            WHERE season=:season AND "Tm" !=:team """)
+    
+    
     conn = engine.connect()
     result = conn.execute(s, season=season, team='TOT').fetchall()
-    print(result)
+
     return jsonify([dict(row) for row in result])
 
 @app.route("/all_data")
