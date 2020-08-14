@@ -36,13 +36,18 @@ def welcome2():
     
     return render_template('roy.html')
 
-@app.route("/about.html")
+@app.route("/mvp.html")
 def welcome3():
+    
+    return render_template('mvp.html')
+
+@app.route("/about.html")
+def welcome4():
     
     return render_template('about.html')
 
 @app.route("/scatter.html") #test route for scatterplot page
-def welcome4():
+def welcome5():
     
     return render_template('scatter.html')
 
@@ -93,6 +98,57 @@ def get_all_players():
     # print(result)
     return jsonify([dict(row) for row in result])
 
+
+@app.route("/roy_predictions")
+def get_roy_predictions():
+    s = text(
+        f"""SELECT *
+        FROM roy_predictions
+        order by  "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+@app.route("/roy_predictions/<season>")
+def get_roy_predictions_season(season):
+    s = text(
+        f"""SELECT *
+        FROM roy_predictions
+        WHERE season=:season
+        order by "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s, season=season).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+
+@app.route("/mvp_predictions")
+def get_mvp_predictions():
+    s = text(
+        f"""SELECT *
+        FROM mvp_predictions
+        order by  "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
+
+@app.route("/mvp_predictions/<season>")
+def get_mvp_predictions_season(season):
+    s = text(
+        f"""SELECT *
+        FROM mvp_predictions
+        WHERE season=:season
+        order by "season" desc, "Player" asc; 
+        """)
+    conn = engine.connect()
+    result = conn.execute(s, season=season).fetchall()
+    # print(result)
+    return jsonify([dict(row) for row in result])
 
 if __name__ == '__main__':
     app.run(debug=True)

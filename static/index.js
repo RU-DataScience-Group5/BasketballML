@@ -1,6 +1,3 @@
-// d3.json("/all_data").then(function(data){
-//   console.log(data)});
-
 // Index HTML Page
 
 function initTable() {
@@ -123,5 +120,66 @@ function initTable2() {
 
 initTable2();
 
-// d3.json("/all_players_basic").then(function(data){
-//         console.log(data);});
+
+function initTable3() {
+  d3.json("/roy_predictions").then(function(data){
+      console.log(data);
+      var columnNames = ["Player",  "Tm", "model", "season"];
+    const redux = (array) =>
+      array.map((o) =>
+        columnNames.reduce((acc, curr) => {
+          acc[curr] = o[curr];
+          return acc;
+        }, {})
+      );
+
+    var almostTableData = redux(data);
+
+    var tableData = almostTableData.map(Object.values);
+
+    $(document).ready(() => {
+      $("#roy_prediction").DataTable({
+        data: tableData,
+        columns: [
+          { title: "Player" },
+          { title: "Team" },
+          { title: "Machine Learning Model" },
+          { title: "Season" },
+        ],
+      });
+    });
+  })
+};
+initTable3();
+
+
+function initTable4() {
+  d3.json("/mvp_predictions").then(function(data){
+      console.log(data);
+      var columnNames = ["Player",  "Tm", "model", "season"];
+    const redux = (array) =>
+      array.map((o) =>
+        columnNames.reduce((acc, curr) => {
+          acc[curr] = o[curr];
+          return acc;
+        }, {})
+      );
+
+    var almostTableData = redux(data);
+
+    var tableData = almostTableData.map(Object.values);
+
+    $(document).ready(() => {
+      $("#mvp_prediction").DataTable({
+        data: tableData,
+        columns: [
+          { title: "Player" },
+          { title: "Team" },
+          { title: "Machine Learning Model" },
+          { title: "Season" },
+        ],
+      });
+    });
+  })
+};
+initTable4();
