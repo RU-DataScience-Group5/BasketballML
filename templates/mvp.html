@@ -18,6 +18,9 @@
   <link rel="stylesheet" type = "text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 </head>
 
 <body>
@@ -49,10 +52,36 @@
                 <h1>Welcome to the NBA Awards Predictor!</h1>  
             </div>
         </div>
+
+    <!--Interactive Scatter Plot -->
+    <div class = "container">
+        <select id="selAward">
+          <option value='mvp'>Most Valuable Player</option>
+          <!-- <option value='roy'>Rookie of the Year</option> -->
+        </select>
+        <select id="selSeason">
+          {% for season in seasons %}
+          <option value='{{ season[0] }}'>{{ season[0] }}</option>
+          {% endfor %}
+        </select>
+        <select id="selStatX">
+          {% for stat in stats %}
+          <option value='{{ stat }}'>{{ stat }}</option>
+          {% endfor %}
+        </select>
+        <select id="selStatY">
+          {% for stat in stats %}
+          <option value='{{ stat }}'>{{ stat }}</option>
+          {% endfor %}
+        </select>
+        <div id="myDiv"></div>
+        <script src="../static/js/players_scatter2.js"></script>
+    </div>
+
         <!-- All Players Table -->
     <div class = "container">
         <div class = "row">
-          <h3 id = table_header>NBA Player Data from 2000-2020</h3>
+          <h3 id = table_header>MVP Predictions from 2016-2020</h3>
         </div>
         <div class = "row">
             <table id="mvp_prediction" class="display"></table>

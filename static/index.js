@@ -3,7 +3,7 @@
 function initTable() {
     d3.json("/all_players_basic").then(function(data){
         console.log(data);
-      var columnNames = ["Player", "PlayerID", "Pos", "Season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "STL", "TOV", "TRB", "MVP"];
+      var columnNames = ["Player", "PlayerID", "Pos", "Season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "STL", "TOV", "TRB"];
       const redux = (array) =>
         array.map((o) =>
           columnNames.reduce((acc, curr) => {
@@ -52,7 +52,6 @@ function initTable() {
             { title: "Steals" },
             { title: "Turnovers" },
             { title: "Total Rebounds" },
-            { title: "MVP" },
           ],
         });
       });
@@ -156,7 +155,8 @@ initTable3();
 function initTable4() {
   d3.json("/mvp_predictions").then(function(data){
       console.log(data);
-      var columnNames = ["Player",  "Tm", "model", "season"];
+      
+      var columnNames = ["model", "Player", "season", "Tm",  "Pos",  "Age", "G", "MP", "2P", "2P%", "2PA","3P","3P%", "3PA", "AST", "BLK", "DRB", "eFG%", "FG%", "FGA", "FT", "FT%", "FTA", "GS", "ORB", "PF", "PTS", "STL", "TOV", "TRB", "PER", "TS%", "3PAr", "FTr", "ORB%", "DRB%", "TRB%", "AST%", "STL%", "BLK%", "TOV%", "USG%", "OWS", "DWS", "WS", "WS/48", "OBPM", "DBPM", "BPM", "VORP", "mvp_votes"];
     const redux = (array) =>
       array.map((o) =>
         columnNames.reduce((acc, curr) => {
@@ -172,11 +172,59 @@ function initTable4() {
     $(document).ready(() => {
       $("#mvp_prediction").DataTable({
         data: tableData,
+        "scrollX": true,
         columns: [
+          { title: "Model" },
           { title: "Player" },
-          { title: "Team" },
-          { title: "Machine Learning Model" },
           { title: "Season" },
+          { title: "Team" },
+          { title: "Position" },
+          { title: "Age" },
+          { title: "Games Played" },
+          { title: "Minutes Played" },
+          { title: "2 Point Made" },
+          { title: "2 Point %" },
+          { title: "2 Point Attempts" },
+          { title: "3 Pointer Scored" },
+          { title: "3 Point %" },
+          { title: "3 Point Attempts" },
+          { title: "Assists" },
+          { title: "Blocks" },
+          { title: "Defensive Rebound" },
+          { title: "eFG%" },
+          { title: "FG%" },
+          { title: "FG Attempts" },
+          { title: "FT" },
+          { title: "FT%" },
+          { title: "FT Attempts" },
+          { title: "Games Started" },
+          { title: "Offensive Rebounds" },
+          { title: "Personal Fouls" },
+          { title: "Points Scored" },
+          { title: "Steals" },
+          { title: "Turnovers" },
+          { title: "Total Rebounds" },
+          { title: "Player Efficiency Rating" },
+          { title: "True Scoring %" },
+          { title: "3PAr" },
+          { title: "FTr" },
+          { title: "Offensive Rebound Percentage" },
+          { title: "Defensive Rebound Percentage" },
+          { title: "Total Rebound Percentage" },
+          { title: "Assist Percentage" },
+          { title: "Steal Percentage" },
+          { title: "Block Percentage" },
+          { title: "Turnover Percentage" },
+          { title: "Player Usage Percentage" },
+          { title: "Offensive Win Shares" },
+          { title: "Defensive Win Shares" },
+          { title: "Win Shares" },
+          { title: "Win Shares per 48 Minutes" },
+          { title: "Offensive +/-" },
+          { title: "Defensive +/-" },
+          { title: "Overall +/-" },
+          { title: "Value Over Replacement Player (VORP)" },
+          { title: "MVP Votes" },
         ],
       });
     });

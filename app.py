@@ -38,8 +38,17 @@ def welcome2():
 
 @app.route("/mvp.html")
 def welcome3():
-    
-    return render_template('mvp.html')
+    inspector = inspect(engine)
+    stats_list = inspector.get_columns('combined_data')
+    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
+    s = text(
+        f"""SELECT DISTINCT "season"
+        FROM combined_data """)
+    conn = engine.connect()
+    seasons = conn.execute(s)
+    print(seasons)
+    return render_template('mvp.html', seasons=seasons,stats=stats, award='mvp')
+    # return render_template('')
 
 @app.route("/about.html")
 def welcome4():
@@ -146,7 +155,7 @@ def get_roy_predictions_season(season):
 def get_mvp_predictions():
     s = text(
         f"""SELECT *
-        FROM mvp_predictions
+        FROM all_players_model_pred
         order by  "season" desc, "Player" asc; 
         """)
     conn = engine.connect()
