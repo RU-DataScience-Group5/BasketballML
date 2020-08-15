@@ -79,7 +79,11 @@ def getdata(award,season,xstat,ystat):
     elif award == "roy":
         s = text(
             f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
-            FROM rookies_only
+            FROM (
+                select combined_data.*, all_rookies."Player", all_rookies."Season", all_rookies."Tm" from all_rookies
+                join combined_data
+                on all_rookies."Player" = combined_data."Player" AND all_rookies."Season" = combined_data."season" AND all_rookies."Tm" = combined_data."Tm";
+            )
             WHERE season=:season AND "Tm" !=:team """)
     
     
