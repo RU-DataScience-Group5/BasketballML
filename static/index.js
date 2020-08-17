@@ -3,7 +3,7 @@
 function initTable() {
     d3.json("/all_players_basic").then(function(data){
         console.log(data);
-      var columnNames = ["Player", "PlayerID", "Pos", "Season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "STL", "TOV", "TRB"];
+      var columnNames = ["Player", "PlayerID", "Pos", "season", "Tm", "2P", "2P%", "2PA","3P","3P%", "3PA", "Age", "AST", "BLK", "DRB", "eFG%", "FG", "FG%", "FGA", "FT", "FT%", "FTA", "G", "GS", "MP", "ORB", "PF", "PTS", "STL", "TOV", "TRB"];
       const redux = (array) =>
         array.map((o) =>
           columnNames.reduce((acc, curr) => {

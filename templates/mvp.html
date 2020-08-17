@@ -36,22 +36,40 @@
         <button type="button" class="btn btn-primary">Basic Button 2</button>
     </div> -->
 
-    <div class="container">
-        <div class="row">
-            <!-- <button type="button" class="btn btn-primary">Rookie of the Year Predictions</button> -->
-            <!-- <a href = "index.html" class="btn btn-primary" >Home Page</a> -->
-            <a href = "/" class="btn btn-primary" >Home Page</a>
-            <a href = "mvp.html" class="btn btn-primary" >Most Valuable Player Predictions</a>
-            <a href = "roy.html" class="btn btn-primary" >Rookie of the Year Predictions</a>
-            <button type="button" class="btn btn-primary">About</button>  
+    <!-- NavBar Bootstrap -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home Page</a></li>
+                    <li><a href="https://github.com/RU-DataScience-Group5/BasketballML">GitHub</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Predictions & More<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mvp.html">Most Valuable Player Predictions</a></li>
+                            <li><a href="roy.html">Rookie of the Year Predictions</a></li>
+                            <li><a href="scatter.html">Explore The Data</a></li>
+                  <!-- <li role="separator" class="divider"></li> -->
+                  <!-- <li><a href="#">Separated link</a></li> -->
+                  <!-- <li role="separator" class="divider"></li> -->
+                  <!-- <li><a href="#">One more separated link</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
+
+
+    
     <div class = "container">
         <div class = "row">
             <div class = "col-lg-12" width = 100%>
                 <h1>Welcome to the NBA Awards Predictor!</h1>  
             </div>
         </div>
+      </div>
 
     <!--Interactive Scatter Plot -->
     <div class = "container">
@@ -91,28 +109,29 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <footer>
-        <div class="footer">
-        <div class='footer-div'>
-            <label class="authors">
-            Authors: Alex Valladares, Evan Sims, Rick Shevlin, Nick VanLangen
-            </label>
-            <br />
-            <label class="year">August, 2020</label>
-            <br>
-            <label class="citation">
-            <em>
-                Data obtained from
-                <a
-                href="https://www.basketball-reference.com/"
-                >
-                Basketball Reference.
-                </a>
-            </em>
-            </label>
-        </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+  <footer>
+    <div class="footer">
+      <div class='footer-div'>
+        <label class="authors">
+          Authors: Alex Valladares, Evan Sims, Rick Shevlin, Nick VanLangen
+        </label>
+        <br />
+        <label class="year">August, 2020</label>
+        <br>
+        <label class="citation">
+          <em>
+            Data obtained from
+            <a
+              href="https://www.basketball-reference.com/"
+            >
+              Basketball Reference.
+            </a>
+          </em>
+        </label>
+      </div>
+    </div>
+  </footer>
 <script src="../static/index.js" type="text/javascript"></script>
 </body>
 </html>

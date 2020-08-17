@@ -34,16 +34,33 @@
         <button type="button" class="btn btn-primary">Basic Button 2</button>
     </div> -->
 
-    <div class="container">
-        <div class="row">
-            <!-- <button type="button" class="btn btn-primary">Rookie of the Year Predictions</button> -->
-            <!-- <a href = "index.html" class="btn btn-primary" >Home Page</a> -->
-            <a href = "/" class="btn btn-primary" >Home Page</a>
-            <a href = "mvp.html" class="btn btn-primary" >Most Valuable Player Predictions</a>
-            <a href = "roy.html" class="btn btn-primary" >Rookie of the Year Predictions</a>
-            <button type="button" class="btn btn-primary">About</button>  
+    <!-- NavBar Bootstrap -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home Page</a></li>
+            <li><a href="https://github.com/RU-DataScience-Group5/BasketballML">GitHub</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Predictions & More<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="mvp.html">Most Valuable Player Predictions</a></li>
+                <li><a href="roy.html">Rookie of the Year Predictions</a></li>
+                <li><a href="scatter.html">Explore The Data</a></li>
+                <!-- <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li> -->
+              </ul>
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
+    </nav>
+
+    <!-- Intro -->
     <div class = "container">
         <div class = "row">
             <div class = "col-lg-12" width = 100%>
@@ -53,13 +70,23 @@
         
         <div class = "row">
             <p id = "intro">This webpage was created in an attempt to utlize Machine Learning in the world of sports, specifically the National Basketball Association.</p>
-            <p id = "p1">The world of sports is continually evolving with the integration of science for the optimization of its athletes, especially when concerned with their health and their ability to maintain their longevity. The world of Data Science has also crept its way into how the game is coached and susbsequently, how the game is played. It is now commonplace for star athletes to be rested for "meaningless" games in order to survive the grueling marathon that is the NBA Regular Season.</p>
             <figure id = "comissioner">
               <img src = "https://cdn.vox-cdn.com/thumbor/2a-WnhpZEolpr0XYuXz6UVUwSUc=/0x0:4065x2827/1200x800/filters:focal(2319x187:2969x837)/cdn.vox-cdn.com/uploads/chorus_image/image/66789465/1206534793.jpg.0.jpg">
               <p style = "font-weight: bold;">NBA Comissioner Adam Silver regarding Data Analytics in the NBA:</p>
               <p>“Analytics have become front and center with precisely when players are rested, how many minutes they get, who they’re matched up against”</p>
             </figure>
-            <p id = "p1">By publishing years worth box score data, Basketball Reference has become a great source for this project. By aggregating and cleaning the data, we were able to take a closer look at what statistical categories have the most influence in determining a player's effectiveness throughout the season. We have plotted the following graphs to illustrate the correlation that certain stats have to Minutes Played. What you will see is that the "Stars" or "Household Names" of the league tend to be higher on the list.</p>
+            <p id = "p1">The world of sports is continually evolving with the integration of science for the optimization of its athletes, especially when concerned with their health and their ability to maintain their longevity. It is now commonplace for star athletes to be rested for "meaningless" games in order to survive the grueling marathon that is the NBA Regular Season. Although controversial, the decision to rest star players has been influenced by Data Analytics. Elite level teams such as the 2015-2016 Golden State Warriors began tracking their players’ practice performance throughout the season. Questionnaires were given to the players by the Director of Athletic Performance Keke Lyles with the purpose of tracking their fatigue levels. Additionally, they had been collecting frames from NBA Broadcast cameras and wearable technology with the purpose of analyzing biomechanical movements from the players.  Wearable technology provided by Catapult Sports had a microprocessor capable of collecting and parsing more than 1,000 data points per second. At the time of this 
+              <a href="https://www.cbssports.com/nba/news/warriors-wearable-weapon-devices-to-monitor-players-while-on-the-court/">
+                CBS Sports Article
+              </a>
+            written by Ken Berger, half of the league’s teams (30 teams total) had implemented the tracking devices to determine fatigue levels of their players. </p>
+            <p id = "p1"></p>
+            <p id = "p1">By publishing years worth of box score data, Basketball Reference has become a great source for this project. By aggregating and cleaning the data, we were able to take a closer look at what statistical categories have the most influence in determining a player's effectiveness throughout the season. We have plotted the following graphs to illustrate the correlation that certain stats have to Minutes Played. What you will see is that the "Stars" or "Household Names" of the league tend to be higher on the list.</p>
+            <figure id = "three_pa">
+              <!-- <img src = "/Images/3pa_per_season.png"> -->
+              <!-- <p style = "font-weight: bold;">Progression of Total 3 Point Attempts Taken per Season</p> -->
+              <!-- <p>“Analytics have become front and center with precisely when players are rested, how many minutes they get, who they’re matched up against”</p> -->
+            </figure>
         </div>
 
         <div class = "row">
@@ -70,7 +97,7 @@
     <!-- All Players Table -->
     <div class = "container">
         <div class = "row">
-          <h3 id = table_header>NBA Player Data from 2000-2020</h3>
+          <h3 id = table_header>NBA Player Data from 1980-2020</h3>
         </div>
         <div class = "row">
             <table id="all-players-table" class="display"></table>

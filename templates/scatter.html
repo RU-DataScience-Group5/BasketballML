@@ -5,33 +5,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <title>NBA Awards & Machine Learning</title>
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+  <!-- D3 Script -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- DataTables -->
+  <link rel="stylesheet" type = "text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
 </head>
 
 <body>
-  <select id="selAward">
-      <option value='mvp'>Most Valuable Player</option>
-      <option value='roy'>Rookie of the Year</option>
-  </select>
-  <select id="selSeason">
-    {% for season in seasons %}
-      <option value='{{ season[0] }}'>{{ season[0] }}</option>
-    {% endfor %}
-  </select>
-  <select id="selStatX">
-    {% for stat in stats %}
-      <option value='{{ stat }}'>{{ stat }}</option>
-    {% endfor %}
-  </select>
-  <select id="selStatY">
-    {% for stat in stats %}
-      <option value='{{ stat }}'>{{ stat }}</option>
-    {% endfor %}
-  </select>
+  <header>
+    <a class = header_pic><img src= 'https://www.vrfitnessinsider.com/wp-content/uploads/2017/10/2016-nba-finals-vr-photo-04_3000.0.jpg' width = 100% height = '450'> </a>
+
+    <h1>NBA Awards Predictor</h1>
+  </header>
+
+  <!-- NavBar Bootstrap -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home Page</a></li>
+          <li><a href="https://github.com/RU-DataScience-Group5/BasketballML">GitHub</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Predictions & More<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="mvp.html">Most Valuable Player Predictions</a></li>
+              <li><a href="roy.html">Rookie of the Year Predictions</a></li>
+              <li><a href="scatter.html">Explore The Data</a></li>
+              <!-- <li role="separator" class="divider"></li> -->
+              <!-- <li><a href="#">Separated link</a></li> -->
+              <!-- <li role="separator" class="divider"></li> -->
+              <!-- <li><a href="#">One more separated link</a></li> -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class = "container">
+    <select id="selAward">
+        <option value='mvp'>Most Valuable Player</option>
+        <option value='roy'>Rookie of the Year</option>
+    </select>
+    <select id="selSeason">
+      {% for season in seasons %}
+        <option value='{{ season[0] }}'>{{ season[0] }}</option>
+      {% endfor %}
+    </select>
+    <select id="selStatX">
+      {% for stat in stats %}
+        <option value='{{ stat }}'>{{ stat }}</option>
+      {% endfor %}
+    </select>
+    <select id="selStatY">
+      {% for stat in stats %}
+        <option value='{{ stat }}'>{{ stat }}</option>
+      {% endfor %}
+    </select>
+  </div>
   <div id="myDiv"></div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="../static/js/players_scatter2.js"></script>
 
+  <!-- Footer -->
+  <footer>
+    <div class="footer">
+      <div class='footer-div'>
+        <label class="authors">
+          Authors: Alex Valladares, Evan Sims, Rick Shevlin, Nick VanLangen
+        </label>
+        <br />
+        <label class="year">August, 2020</label>
+        <br>
+        <label class="citation">
+          <em>
+            Data obtained from
+            <a
+              href="https://www.basketball-reference.com/"
+            >
+              Basketball Reference.
+            </a>
+          </em>
+        </label>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
