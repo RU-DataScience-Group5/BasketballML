@@ -50,10 +50,6 @@ def welcome3():
     return render_template('mvp.html', seasons=seasons,stats=stats, award='mvp')
     # return render_template('')
 
-@app.route("/about.html")
-def welcome4():
-    
-    return render_template('about.html')
 
 @app.route("/scatter.html") #test route for scatterplot page
 def welcome5():
@@ -80,10 +76,10 @@ def getdata(award,season,xstat,ystat):
         s = text(
             f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
             FROM (
-                select combined_data.*, all_rookies."Player", all_rookies."Season", all_rookies."Tm" from all_rookies
-                join combined_data
-                on all_rookies."Player" = combined_data."Player" AND all_rookies."Season" = combined_data."season" AND all_rookies."Tm" = combined_data."Tm";
-            )
+                select combined_data.* from combined_data
+                join all_rookies
+                on all_rookies."Player" = combined_data."Player" AND all_rookies."Season" = combined_data."season" AND all_rookies."Tm" = combined_data."Tm"
+            ) as temp
             WHERE season=:season AND "Tm" !=:team """)
     
     
@@ -154,7 +150,7 @@ def get_roy_predictions_season(season):
     # print(result)
     return jsonify([dict(row) for row in result])
 
-
+# Used for MVP Page DataTables
 @app.route("/mvp_predictions")
 def get_mvp_predictions():
     s = text(
@@ -167,18 +163,24 @@ def get_mvp_predictions():
     # print(result)
     return jsonify([dict(row) for row in result])
 
-@app.route("/mvp_predictions/<season>")
-def get_mvp_predictions_season(season):
+@app.route("/mvp_predictions/<season>/<xstat>/<ystat>")
+def get_mvp_predictions_season(season,xstat,ystat):
     s = text(
-        f"""SELECT *
-        FROM mvp_predictions
-        WHERE season=:season
-        order by "season" desc, "Player" asc; 
-        """)
+        f"""SELECT DISTINCT combined_data."Player", combined_data."Tm",combined_data."season", combined_data."{xstat}", combined_data."{ystat}", combined_data.mvp_votes,
+CASE
+    WHEN mvp_predictions."Player" IS NOT NULL THEN 1
+    ELSE 0
+END AS mvp_predicted
+FROM combined_data
+LEFT JOIN mvp_predictions
+ON mvp_predictions."Player" = combined_data."Player" AND mvp_predictions."season" = combined_data."season" AND mvp_predictions."Tm" = combined_data."Tm"
+WHERE combined_data."season"=:season AND combined_data."Tm" !=:team """)
+    
     conn = engine.connect()
-    result = conn.execute(s, season=season).fetchall()
-    # print(result)
+    result = conn.execute(s, season=season, team='TOT').fetchall()
+
     return jsonify([dict(row) for row in result])
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -71,7 +71,7 @@
         </div>
       </div>
 
-    <!--Interactive Scatter Plot -->
+    <!--Interactive Scatter Plot ALL STATS -->
     <div class = "container">
         <select id="selAward">
           <option value='mvp'>Most Valuable Player</option>
@@ -93,7 +93,6 @@
           {% endfor %}
         </select>
         <div id="myDiv"></div>
-        <script src="../static/js/players_scatter2.js"></script>
     </div>
 
         <!-- All Players Table -->
@@ -106,6 +105,27 @@
         </div>
     </div>
 
+    <!-- Interactive Plot MVP Predictor ONLY -->
+    <div class = "container">
+      <div class = "row">
+        <select id="selSeason">
+          {% for season in seasons %}
+          <option value='{{ season[0] }}'>{{ season[0] }}</option>
+          {% endfor %}
+        </select>
+        <select id="selStatX">
+          {% for stat in stats %}
+          <option value='{{ stat }}'>{{ stat }}</option>
+          {% endfor %}
+        </select>
+        <select id="selStatY">
+          {% for stat in stats %}
+          <option value='{{ stat }}'>{{ stat }}</option>
+          {% endfor %}
+        </select>
+        <div id="myDiv"></div>
+      </div>
+    </div>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -132,6 +152,8 @@
       </div>
     </div>
   </footer>
+<!-- JS Files -->
 <script src="../static/index.js" type="text/javascript"></script>
+<script src="../static/js/players_scatter2.js"></script>
 </body>
 </html>
