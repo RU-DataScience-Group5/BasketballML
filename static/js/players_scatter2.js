@@ -2,12 +2,12 @@ function UpdateScatter(season, xstat, ystat){
 console.log("here")
 var myDiv = d3.select("#myDiv")
 
-award_sel = d3.select("#selAward")
+//award_sel = d3.select("#selAward")
 season_sel = d3.select("#selSeason")
 xstat_sel = d3.select("#selStatX")
 ystat_sel = d3.select("#selStatY")
 
-award = award_sel.property("value")
+//award = award_sel.property("value")
 season = season_sel.property("value")
 xstat = xstat_sel.property("value")
 ystat = ystat_sel.property("value")
@@ -25,23 +25,48 @@ d3.json(PlayerDataURL).then( PlayerData => {
     console.log(PlayerName, x_stat, y_stat)
 
     colorMap = PlayerData.map(function(Player){
+//        if (award == "mvp"){
+//            if (Player["mvp_votes"] != null){
+//                return "blue"
+//            }
+//            else {
+//                return "gray"
+//            }
+//        }
+//        else if(award == "roy"){
+//            if (Player["rookie_votes"] != null){
+//                return "blue"
+//            }
+//            else {
+//                return "gray"
+//            }
+//        }
+        //var evaluate = (Player["mvp_votes"]!=null)<<1 | (Player["mvp_predicted"]!=0)
+        //console.log((Player["mvp_votes"]!=null)<<1 | (Player["mvp_predicted"]!=0))
         if (award == "mvp"){
-            if (Player["mvp_votes"] != null){
-                return "blue"
-            }
-            else {
-                return "gray"
-            }
+            var mvp_eval = ((Player["mvp_votes"]!=null) ? 2 : 0) + ((Player["mvp_predicted"]!=0)? 1 : 0)
+            console.log(mvp_eval)
+            switch(mvp_eval) {
+                case 0:
+                    // no mvp_votes, not predicted
+                    return "gray"
+                case 1:
+                    // no mvp_votes, predicted
+                    return "red"
+                case 2:
+                    // mvp_votes, not predicted
+                    return "blue"
+                case 3:
+                    //mvp_votes, predicted
+                    return "green";
+
+              // code block
+          }
         }
-        else if(award == "roy"){
-            if (Player["rookie_votes"] != null){
-                return "blue"
-            }
-            else {
-                return "gray"
-            }
-        }
+    
     })
+
+
     console.log(colorMap)
 
     var trace1 = {
@@ -74,7 +99,7 @@ var layout = {
 //  yaxis: {
 //    range: [0, 8]
 //  },
-  title:'Data Labels Hover',
+  title:'NBA Statistics Viewer',
   hovermode:'closest'
 };
 
@@ -82,12 +107,12 @@ var layout = {
 })
 }
 
-award_sel = d3.select("#selAward")
+//award_sel = d3.select("#selAward")
 season_sel = d3.select("#selSeason")
 xstat_sel = d3.select("#selStatX")
 ystat_sel = d3.select("#selStatY")
 
-award_sel.on("change", UpdateScatter)
+//award_sel.on("change", UpdateScatter)
 season_sel.on("change", UpdateScatter)
 xstat_sel.on("change", UpdateScatter)
 ystat_sel.on("change", UpdateScatter)
