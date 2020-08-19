@@ -33,17 +33,25 @@ def welcome():
 
 @app.route("/roy.html")
 def welcome2():
-    
-    return render_template('roy.html')
+    inspector = inspect(engine)
+    stats_list = inspector.get_columns('combined_data_vw')
+    stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
+    s = text(
+        f"""SELECT DISTINCT "season"
+        FROM combined_data_vw """)
+    conn = engine.connect()
+    seasons = conn.execute(s)
+    print(seasons)
+    return render_template('roy.html', seasons=seasons,stats=stats, award='roy')
 
 @app.route("/mvp.html")
 def welcome3():
     inspector = inspect(engine)
-    stats_list = inspector.get_columns('combined_data')
+    stats_list = inspector.get_columns('combined_data_vw')
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
         f"""SELECT DISTINCT "season"
-        FROM combined_data """)
+        FROM combined_data_vw """)
     conn = engine.connect()
     seasons = conn.execute(s)
     print(seasons)
@@ -54,11 +62,11 @@ def welcome3():
 @app.route("/scatter.html") #test route for scatterplot page
 def welcome5():
     inspector = inspect(engine)
-    stats_list = inspector.get_columns('combined_data')
+    stats_list = inspector.get_columns('combined_data_vw')
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
         f"""SELECT DISTINCT "season"
-        FROM combined_data """)
+        FROM combined_data_vw """)
     conn = engine.connect()
     seasons = conn.execute(s)
     print(seasons)
@@ -69,16 +77,17 @@ def welcome5():
 def getdata(award,season,xstat,ystat):
     if award == "mvp":
         s = text(
-            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
-            FROM combined_data
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes, mvp_predicted, roy_predicted
+            FROM combined_data_vw
             WHERE season=:season AND "Tm" !=:team """)
+
     elif award == "roy":
         s = text(
-            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes
+            f"""SELECT "Player", "Tm","season", "{xstat}", "{ystat}", mvp_votes, rookie_votes, mvp_predicted, roy_predicted
             FROM (
-                select combined_data.* from combined_data
+                select combined_data_vw.* from combined_data_vw
                 join all_rookies
-                on all_rookies."Player" = combined_data."Player" AND all_rookies."Season" = combined_data."season" AND all_rookies."Tm" = combined_data."Tm"
+                on all_rookies."Player" = combined_data_vw."Player" AND all_rookies."Season" = combined_data_vw."season" AND all_rookies."Tm" = combined_data_vw."Tm"
             ) as temp
             WHERE season=:season AND "Tm" !=:team """)
     
@@ -92,7 +101,7 @@ def getdata(award,season,xstat,ystat):
 def get_all_data():
     s = text(
         f"""SELECT *
-        FROM combined_data
+        FROM combined_data_vw
         WHERE "Tm" !=:team """)
     conn = engine.connect()
     result = conn.execute(s, team = "TOT").fetchall()
@@ -166,15 +175,15 @@ def get_mvp_predictions():
 @app.route("/mvp_predictions/<season>/<xstat>/<ystat>")
 def get_mvp_predictions_season(season,xstat,ystat):
     s = text(
-        f"""SELECT DISTINCT combined_data."Player", combined_data."Tm",combined_data."season", combined_data."{xstat}", combined_data."{ystat}", combined_data.mvp_votes,
+        f"""SELECT DISTINCT combined_data_vw."Player", combined_data_vw."Tm",combined_data_vw."season", combined_data_vw."{xstat}", combined_data_vw."{ystat}", combined_data_vw.mvp_votes, combined_data_vw.rookie_votes,
 CASE
     WHEN mvp_predictions."Player" IS NOT NULL THEN 1
     ELSE 0
 END AS mvp_predicted
-FROM combined_data
+FROM combined_data_vw
 LEFT JOIN mvp_predictions
-ON mvp_predictions."Player" = combined_data."Player" AND mvp_predictions."season" = combined_data."season" AND mvp_predictions."Tm" = combined_data."Tm"
-WHERE combined_data."season"=:season AND combined_data."Tm" !=:team """)
+ON mvp_predictions."Player" = combined_data_vw."Player" AND mvp_predictions."season" = combined_data_vw."season" AND mvp_predictions."Tm" = combined_data_vw."Tm"
+WHERE combined_data_vw."season"=:season AND combined_data_vw."Tm" !=:team """)
     
     conn = engine.connect()
     result = conn.execute(s, season=season, team='TOT').fetchall()

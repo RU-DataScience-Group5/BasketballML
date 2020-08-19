@@ -2,12 +2,12 @@ function UpdateScatter(season, xstat, ystat){
 console.log("here")
 var myDiv = d3.select("#myDiv")
 
-award_sel = d3.select("#selAward")
+//award_sel = d3.select("#selAward")
 season_sel = d3.select("#selSeason")
 xstat_sel = d3.select("#selStatX")
 ystat_sel = d3.select("#selStatY")
 
-award = award_sel.property("value")
+//award = award_sel.property("value")
 season = season_sel.property("value")
 xstat = xstat_sel.property("value")
 ystat = ystat_sel.property("value")
@@ -82,12 +82,12 @@ var layout = {
 })
 }
 
-award_sel = d3.select("#selAward")
+//award_sel = d3.select("#selAward")
 season_sel = d3.select("#selSeason")
 xstat_sel = d3.select("#selStatX")
 ystat_sel = d3.select("#selStatY")
 
-award_sel.on("change", UpdateScatter)
+//award_sel.on("change", UpdateScatter)
 season_sel.on("change", UpdateScatter)
 xstat_sel.on("change", UpdateScatter)
 ystat_sel.on("change", UpdateScatter)
