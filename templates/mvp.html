@@ -103,6 +103,81 @@
             <table id="mvp_prediction" class="display"></table>
         </div>
     </div>
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12" width=100%>
+              <h3 id = table_header>Actual vs Model MVP</h3>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-4">
+              <h3>2018-19</h3>
+              <h4>Actual</h4>
+              <ol>
+                  {% for val in actual %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+              <h4>Model Prediction</h4>
+              <ol>
+                  {% for val in predicted %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+          </div>
+
+          <div class="col-lg-4">
+              <h3>2017-18</h3>
+              <h4>Actual</h4>
+              <ol>
+                  {% for val in actual1 %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+              <h4>Model Prediction</h4>
+              <ol>
+                  {% for val in predicted1 %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+          </div>
+          <div class="col-lg-4">
+              <h3>2016-17</h3>
+              <h4>Actual</h4>
+              <ol>
+                  {% for val in actual2 %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+              <h4>Model Prediction</h4>
+              <ol>
+                  {% for val in predicted2 %}
+                  <li>{{ val[0] }} </li>
+                  {% endfor %}
+              </ol>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12" width=100%>
+              <h3 id = table_header>2019-20 MVP Prediction</h3>
+          </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4">
+          <ol>
+              {% for val in predicted3 %}
+              <li>{{ val[0] }} </li>
+              {% endfor %}
+          </ol>
+      </div>
+
+  </div>
 
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

@@ -38,11 +38,50 @@ def welcome2():
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
         f"""SELECT DISTINCT "season"
-        FROM combined_data_vw """)
+        FROM combined_data_vw order by 1 desc""")
     conn = engine.connect()
     seasons = conn.execute(s)
     print(seasons)
-    return render_template('roy.html', seasons=seasons,stats=stats, award='roy')
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM Roy where season in ('2018-19')
+        order by season,"Rank" """)
+    actual = conn.execute(s)
+    s = text(
+        f"""SELECT "Player","season"
+        FROM roy_predictions_rank where season in ('2018-19')
+        order by season,score desc """)
+    predicted = conn.execute(s)
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM Roy where season in ('2017-18')
+        order by season,"Rank" """)
+    actual1 = conn.execute(s)
+    s = text(
+        f"""SELECT "Player","season"
+        FROM roy_predictions_rank where season in ('2017-18')
+        order by season,score desc """)
+    predicted1 = conn.execute(s)
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM Roy where season in ('2016-17')
+        order by season,"Rank" """)
+    actual2 = conn.execute(s)
+    s = text(
+        f"""SELECT "Player","season"
+        FROM roy_predictions_rank where season in ('2016-17')
+        order by season,score desc """)
+    predicted2 = conn.execute(s)
+    s = text(
+        f"""SELECT "Player","season"
+        FROM roy_predictions_rank where season in ('2019-20')
+        order by season,score desc """)
+    predicted3 = conn.execute(s)
+
+    return render_template('roy.html', seasons=seasons,stats=stats, award='roy',actual=actual,predicted=predicted,actual1=actual1,predicted1=predicted1,actual2=actual2,predicted2=predicted2,predicted3=predicted3)
 
 @app.route("/mvp.html")
 def welcome3():
@@ -51,11 +90,50 @@ def welcome3():
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
         f"""SELECT DISTINCT "season"
-        FROM combined_data_vw """)
+        FROM combined_data_vw order by 1 desc """)
     conn = engine.connect()
     seasons = conn.execute(s)
     print(seasons)
-    return render_template('mvp.html', seasons=seasons,stats=stats, award='mvp')
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM mvp where season in ('2018-19')
+        order by season,"Rank" """)
+    actual = conn.execute(s)
+    s = text(
+        f"""SELECT distinct "Player","season"
+        FROM mvp_predictions where season in ('2018-19')
+        order by season desc """)
+    predicted = conn.execute(s)
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM mvp where season in ('2017-18')
+        order by season,"Rank" """)
+    actual1 = conn.execute(s)
+    s = text(
+        f"""SELECT distinct "Player","season"
+        FROM mvp_predictions where season in ('2017-18')
+        order by season desc """)
+    predicted1 = conn.execute(s)
+
+    s = text(
+        f"""SELECT "Player","season"
+        FROM mvp where season in ('2016-17')
+        order by season,"Rank" """)
+    actual2 = conn.execute(s)
+    s = text(
+        f"""SELECT distinct "Player","season"
+        FROM mvp_predictions where season in ('2016-17')
+        order by season desc """)
+    predicted2 = conn.execute(s)
+    s = text(
+        f"""SELECT distinct "Player","season"
+        FROM mvp_predictions where season in ('2019-20')
+        order by season desc """)
+    predicted3 = conn.execute(s)
+
+    return render_template('mvp.html', seasons=seasons,stats=stats, award='mvp',actual=actual,predicted=predicted,actual1=actual1,predicted1=predicted1,actual2=actual2,predicted2=predicted2,predicted3=predicted3)
     # return render_template('')
 
 
@@ -66,7 +144,7 @@ def welcome5():
     stats = [stat["name"].strip() for stat in stats_list if stat["name"].strip() not in ['Player', 'season','Tm','PlayerID','Pos']]    
     s = text(
         f"""SELECT DISTINCT "season"
-        FROM combined_data_vw """)
+        FROM combined_data_vw order by 1 desc""")
     conn = engine.connect()
     seasons = conn.execute(s)
     print(seasons)
