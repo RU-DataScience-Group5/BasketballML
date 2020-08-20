@@ -29,6 +29,9 @@ nav {
 
 /* ul .active{background:#333;} */
 
+#intro {margin: 7px;}
+#p1 { margin: 7px;}
+
 #comissioner{text-align: center;
     float: left;
     font-size: 15px;
@@ -42,7 +45,11 @@ nav {
     font-size: 15px;
     padding: 15px;}
 
-
+.table-responsive {width: 85%;
+margin-left: auto;
+margin-right: auto;
+font-size: 20px;
+}
 /* End of Index Template */
 
 /* Start of ROY Page */
