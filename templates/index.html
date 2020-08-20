@@ -88,22 +88,229 @@
               <!-- <p>“Analytics have become front and center with precisely when players are rested, how many minutes they get, who they’re matched up against”</p> -->
             </figure>
         </div>
-
-        <div class = "row">
-        </div>
-    </div>
-    
-      
-    <!-- All Players Table -->
-    <div class = "container">
-        <div class = "row">
-          <h3 id = table_header>NBA Player Data from 1980-2020</h3>
-        </div>
-        <div class = "row">
+        
+        <!-- All Players Table -->
+        <div class="container">
+          <div class="row">
+            <h3 id=table_header>NBA Player Data from 1980-2020</h3>
+          </div>
+          <div class="row">
             <table id="all-players-table" class="display"></table>
+          </div>
+        </div>
+
+
+        <div class = "row">
+          <h1 style = "text-align: center;"> Basketball Statistics</h1>
+          <h2 style = "text-align: center;"> Basic Statistics <h2>
+          <div class="table-responsive">          
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Stat Abbreviation</th>
+                  <th>Definition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>G</td>
+                  <td>Games Played</td>
+                </tr>
+                <tr>
+                  <td>MP</td>
+                  <td>Minutes Played</td>
+                </tr>
+                <tr>
+                  <td>2P</td>
+                  <td>2 Point Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>2P%</td>
+                  <td>Percentage of 2P Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>2PA</td>
+                  <td>2 Point Attempt</td>
+                </tr>
+                <tr>
+                  <td>3P</td>
+                  <td>3 Point Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>3P%</td>
+                  <td>Percentage of 2P Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>3PA</td>
+                  <td>3 Point Attempt</td>
+                </tr>
+                <tr>
+                  <td>AST</td>
+                  <td>Assist</td>
+                </tr>
+                <tr>
+                  <td>BLK</td>
+                  <td>Block</td>
+                </tr>
+                <tr>
+                  <td>DRB</td>
+                  <td>Defensive Rebound</td>
+                </tr>
+                <tr>
+                  <td>FG</td>
+                  <td>Field Goal</td>
+                </tr>
+                <tr>
+                  <td>FG%</td>
+                  <td>Percentage of Field Goal Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>FGA</td>
+                  <td>Field Goal Attempts</td>
+                </tr>
+                <tr>
+                  <td>FT</td>
+                  <td>Free Throws Made</td>
+                </tr>
+                <tr>
+                  <td>FT%</td>
+                  <td>Percentage of Field Throw Attempts Scored</td>
+                </tr>
+                <tr>
+                  <td>FTA</td>
+                  <td>Free Throws Attempts</td>
+                </tr>
+                <tr>
+                  <td>GS</td>
+                  <td>Games Started</td>
+                </tr>
+                <tr>
+                  <td>ORB</td>
+                  <td>Offensive Rebound</td>
+                </tr>
+                <tr>
+                  <td>PF</td>
+                  <td>Personal Fouls Committed</td>
+                </tr>
+                <tr>
+                  <td>PTS</td>
+                  <td>Points Scored</td>
+                </tr>
+                <tr>
+                  <td>STL</td>
+                  <td>Steals Made</td>
+                </tr>
+                <tr>
+                  <td>TOV</td>
+                  <td>Turnovers Committed</td>
+                </tr>
+                <tr>
+                  <td>TRB</td>
+                  <td>Total Rebounds</td>
+                </tr>
+                
+                
+              </tbody>
+            </table>
+          </div>
+
+          <h2 style = "text-align: center;"> Advanced Statistics <h2>
+            <div class="table-responsive">          
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Stat Abbreviation</th>
+                    <th>Definition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>PER</td>
+                    <td>Player Efficiency Rating. Developed by John Hollinger, is a per-minute rating that sums up all a player's positive accomplishments and subtracts the negative accomplishments</td>
+                  </tr>
+                  <tr>
+                    <td>TS%</td>
+                    <td>True Shooting Percentage. True Shooting Percentage is a measure of shooting efficiency that takes into account field goals, 3-point field goals, and free throws.</td>
+                  </tr>
+                  <tr>
+                    <td>3PAr</td>
+                    <td>3 Point Attempt Rate. The percentage of a player’s total Field Goal Attempts that were 3 Point Attempts</td>
+                  </tr>
+                  <tr>
+                    <td>FTr</td>
+                    <td>Free Throw Rate. A ratio of a player’s Free Throw Attempts to Field Goal Attempts.</td>
+                  </tr>
+                  <tr>
+                    <td>ORB% </td>
+                    <td>Offensive Rebound Percentage. Offensive rebound percentage is an estimate of the percentage of available offensive rebounds a player grabbed while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>DRB%</td>
+                    <td>Defensive Rebound Percentage.  Defensive rebound percentage is an estimate of the percentage of available defensive rebounds a player grabbed while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>TRB%</td>
+                    <td>Total Rebound Percentage. Total rebound percentage is an estimate of the percentage of available rebounds a player grabbed while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>AST% </td>
+                    <td>Assist Percentage. Assist percentage is an estimate of the percentage of teammate field goals a player assisted while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>STL%</td>
+                    <td>Steal Percentage. Steal Percentage is an estimate of the percentage of opponent possessions that end with a steal by the player while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>BLK %</td>
+                    <td>Block Percentage. Block percentage is an estimate of the percentage of opponent two-point field goal attempts blocked by the player while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>TOV%</td>
+                    <td>Turnover Percentage. Turnover percentage is an estimate of turnovers per 100 plays</td>
+                  </tr>
+                  <tr>
+                    <td>USG%</td>
+                    <td>Player Usage Percentage. Usage Percentage is an estimate of the percentage of team plays used by a player while he was on the floor.</td>
+                  </tr>
+                  <tr>
+                    <td>WS</td>
+                    <td>Win Shares. Developed by Dean Oliver, it is a measure of a player's contribution to their teams wins. A team's total wins is roughly the sum of all of its players' win shares.</td>
+                  </tr>
+                  <tr>
+                    <td>OWS</td>
+                    <td>Offensive Win Shares. An advanced statistic developed by Dean Oliver</td>
+                  </tr>
+                  <tr>
+                    <td>DWS</td>
+                    <td>Defensive Win Shares. Defensive Win Shares to players is based on Dean Oliver's Defensive Rating. Defensive Rating is an estimate of the player's points allowed per 100 defensive possessions</td>
+                  </tr>
+                  <tr>
+                    <td>WS/48</td>
+                    <td>Win Shares per 48 Minutes (1 Full Basketball Game)</td>
+                  </tr>
+                  <tr>
+                    <td>BPM</td>
+                    <td>Box Score Plus or Minus. Estimated Player Contribution while on the Floor. Variables are weighted differently depending on player's position.</td>
+                  </tr>
+                  <tr>
+                    <td>OBPM</td>
+                    <td>Offensive Box Score Plus or Minus. Similar to BPM, it uses the same variables but with weighed differently</td>
+                  </tr>
+                  <tr>
+                    <td>DBPM</td>
+                    <td>Defensive Box Score Plus or Minus. BPM - OBPM</td>
+                  </tr>
+                  <tr>
+                    <td>VORP</td>
+                    <td>Value Over Replacement Player is an estimate of each player's overall contribution to the team, measured vs. what a theoretical "replacement player" would provide</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+        </div>
         </div>
     </div>
-
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
