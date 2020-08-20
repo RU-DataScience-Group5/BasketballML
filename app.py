@@ -137,9 +137,10 @@ def get_all_players():
 @app.route("/roy_predictions")
 def get_roy_predictions():
     s = text(
-        f"""SELECT *
-        FROM roy_predictions
-        order by  "season" desc, "Player" asc; 
+        f"""select *
+FROM (select roy_predictions."model", combined_data.* from combined_data
+right outer join roy_predictions
+on combined_data."Player" = roy_predictions."Player" AND combined_data."season" = roy_predictions."season" AND combined_data."Tm" = roy_predictions."Tm") as temp; 
         """)
     conn = engine.connect()
     result = conn.execute(s).fetchall()
@@ -163,9 +164,10 @@ def get_roy_predictions_season(season):
 @app.route("/mvp_predictions")
 def get_mvp_predictions():
     s = text(
-        f"""SELECT *
-        FROM all_players_model_pred
-        order by  "season" desc, "Player" asc; 
+        f"""select *
+FROM (select mvp_predictions."model", combined_data.* from combined_data
+join mvp_predictions
+on combined_data."Player" = mvp_predictions."Player" AND combined_data."season" = mvp_predictions."season" AND combined_data."Tm" = mvp_predictions."Tm") as temp; 
         """)
     conn = engine.connect()
     result = conn.execute(s).fetchall()
