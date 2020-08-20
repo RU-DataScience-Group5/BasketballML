@@ -63,6 +63,27 @@ d3.json(PlayerDataURL).then( PlayerData => {
               // code block
           }
         }
+
+        if (award == "roy"){
+            var roy_eval = ((Player["rookie_votes"]!=null) ? 2 : 0) + ((Player["roy_predicted"]!=0)? 1 : 0)
+            console.log(roy_eval)
+            switch(roy_eval) {
+                case 0:
+                    // no mvp_votes, not predicted
+                    return "gray"
+                case 1:
+                    // no mvp_votes, predicted
+                    return "red"
+                case 2:
+                    // mvp_votes, not predicted
+                    return "blue"
+                case 3:
+                    //mvp_votes, predicted
+                    return "green";
+
+              // code block
+          }
+        }
     
     })
 
@@ -93,12 +114,23 @@ d3.json(PlayerDataURL).then( PlayerData => {
     var data = [ trace1 ];
 
 var layout = {
-//  xaxis: {
+    xaxis: {
+        title: xstat,
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 18,
+          color: 'black'
+        },
 //    range: [ 0.75, 5.25 ]
-//  },
-//  yaxis: {
-//    range: [0, 8]
-//  },
+    },
+    yaxis: {
+        title: ystat,
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 18,
+          color: 'black'
+        },
+    },
   title:'NBA Statistics Viewer',
   hovermode:'closest'
 };
